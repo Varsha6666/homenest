@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Unga Property - Find Your Perfect Property</title>
+  <title>Unga Property</title>
 
   <style>
     :root {
@@ -13,8 +13,8 @@
       --yellow: #fdc200;
       --text: #17211d;
       --muted: #66736d;
-      --border: #e4e9e6;
-      --background: #f6f8f7;
+      --line: #e4e9e6;
+      --bg: #f6f8f7;
     }
 
     * {
@@ -33,19 +33,20 @@
       background: white;
     }
 
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
     button,
     input,
-    select {
+    select,
+    textarea {
       font: inherit;
     }
 
     button {
       cursor: pointer;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
     }
 
     .container {
@@ -58,7 +59,7 @@
     header {
       height: 72px;
       background: white;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--line);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -71,17 +72,20 @@
       gap: 25px;
     }
 
+    /* LOGO */
+
     .logo {
       width: 180px;
       height: 62px;
       object-fit: contain;
       object-position: left center;
+      display: block;
     }
 
     .navlinks {
       display: flex;
       align-items: center;
-      gap: 25px;
+      gap: 22px;
       margin-left: auto;
       font-size: 14px;
       font-weight: 650;
@@ -93,12 +97,12 @@
 
     .actions {
       display: flex;
-      gap: 9px;
       align-items: center;
+      gap: 8px;
     }
 
     .actions button {
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
       background: white;
       border-radius: 8px;
       padding: 9px 12px;
@@ -145,7 +149,7 @@
       left: -14px;
       min-width: 190px;
       background: white;
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
       border-radius: 10px;
       box-shadow: 0 12px 28px rgba(0,0,0,.12);
       padding: 8px;
@@ -171,15 +175,23 @@
     }
 
     .dropdown a:hover {
-      background: var(--background);
+      background: var(--bg);
       color: var(--green);
+    }
+
+    .subhead {
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 7px 12px 4px;
+      font-weight: 800;
     }
 
     /* ================= HERO ================= */
 
     .hero {
       color: white;
-      padding: 60px 0 40px;
+      padding: 52px 0 34px;
       min-height: 430px;
 
       background:
@@ -197,7 +209,6 @@
       font-size: 50px;
       line-height: 1.05;
       margin-bottom: 13px;
-      letter-spacing: -1px;
     }
 
     .hero p {
@@ -205,7 +216,14 @@
       margin-bottom: 22px;
     }
 
-    /* ================= SEARCH ================= */
+    .mode-label {
+      font-size: 11px;
+      color: #dcece6;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    /* ================= TABS ================= */
 
     .tabs {
       display: flex;
@@ -224,9 +242,11 @@
 
     .tab.active {
       background: var(--yellow);
-      color: #182019;
       border-color: var(--yellow);
+      color: #182019;
     }
+
+    /* ================= SEARCH ================= */
 
     .search {
       background: white;
@@ -240,7 +260,7 @@
 
     .field {
       padding: 8px 15px;
-      border-right: 1px solid var(--border);
+      border-right: 1px solid var(--line);
     }
 
     .field label {
@@ -309,7 +329,7 @@
     }
 
     .soft {
-      background: var(--background);
+      background: var(--bg);
     }
 
     .head {
@@ -338,11 +358,12 @@
     }
 
     .card {
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
       border-radius: 13px;
       overflow: hidden;
       background: white;
       transition: .2s;
+      cursor: pointer;
     }
 
     .card:hover {
@@ -397,7 +418,7 @@
     }
 
     .meta {
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--line);
       padding-top: 9px;
       margin-top: 9px;
     }
@@ -424,7 +445,7 @@
 
     .cat {
       background: white;
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
       border-radius: 12px;
       padding: 22px 8px;
       text-align: center;
@@ -440,7 +461,7 @@
       font-size: 12px;
     }
 
-    /* ================= WHY CHOOSE ================= */
+    /* ================= WHY ================= */
 
     .why {
       display: grid;
@@ -510,6 +531,320 @@
       font-weight: 900;
     }
 
+    /* ================= DETAIL PAGE ================= */
+
+    .detail {
+      display: none;
+    }
+
+    .detail.active {
+      display: block;
+    }
+
+    .home.hidden {
+      display: none;
+    }
+
+    .breadcrumb {
+      padding: 18px 0;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .detailgrid {
+      display: grid;
+      grid-template-columns: 1.6fr .9fr;
+      gap: 24px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 92px;
+      gap: 9px;
+    }
+
+    .mainphoto {
+      height: 430px;
+      border-radius: 10px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .thumbs {
+      display: grid;
+      gap: 9px;
+    }
+
+    .thumb {
+      height: 78px;
+      border-radius: 7px;
+      background-size: cover;
+      background-position: center;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+
+    .thumb.active {
+      border-color: var(--green);
+    }
+
+    .info {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 22px;
+      height: max-content;
+      position: sticky;
+      top: 90px;
+    }
+
+    .info .price {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .info h1 {
+      font-size: 23px;
+      margin-bottom: 6px;
+    }
+
+    .specs {
+      display: grid;
+      gap: 9px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 15px;
+    }
+
+    .contact {
+      width: 100%;
+      border: 0;
+      background: var(--green);
+      color: white;
+      border-radius: 8px;
+      padding: 12px;
+      font-weight: 800;
+      margin-top: 18px;
+    }
+
+    .save {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 8px;
+      padding: 11px;
+      margin-top: 8px;
+    }
+
+    .owner,
+    .mapbox {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 15px;
+    }
+
+    .detailcontent {
+      margin-top: 25px;
+    }
+
+    .detailcontent h2 {
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+
+    .detailcontent p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .details-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 40px;
+    }
+
+    .detailrow {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      padding: 9px 0;
+      font-size: 12px;
+    }
+
+    .detailrow span {
+      color: var(--muted);
+    }
+
+    .back {
+      border: 0;
+      background: none;
+      color: var(--green);
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    /* ================= MODAL ================= */
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modalbox {
+      background: white;
+      width: min(620px,100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 15px;
+      padding: 25px;
+    }
+
+    .modalhead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .close {
+      border: 0;
+      background: #f1f3f2;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 20px;
+    }
+
+    .form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .form label {
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .form input,
+    .form select,
+    .form textarea {
+      width: 100%;
+      margin-top: 5px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 10px;
+    }
+
+    .form textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .submit {
+      border: 0;
+      background: var(--green);
+      color: white;
+      border-radius: 7px;
+      padding: 11px 16px;
+      font-weight: 800;
+    }
+
+    /* ================= IMAGE UPLOAD ================= */
+
+    .upload-box {
+      border: 1px dashed #aebbb5;
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+      background: #fafcfb;
+      margin-top: 5px;
+    }
+
+    .upload-box input {
+      display: none;
+    }
+
+    .upload-label {
+      display: inline-block;
+      background: #eaf3ef;
+      color: var(--green);
+      padding: 9px 14px;
+      border-radius: 7px;
+      font-weight: 800;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .upload-help {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .image-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .image-preview {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      aspect-ratio: 1;
+    }
+
+    .image-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .remove-image {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      border: 0;
+      background: rgba(0,0,0,.7);
+      color: white;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+    }
+
+    .primary-badge {
+      position: absolute;
+      left: 5px;
+      bottom: 5px;
+      background: var(--green);
+      color: white;
+      border-radius: 5px;
+      padding: 3px 6px;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
     /* ================= FOOTER ================= */
 
     footer {
@@ -530,6 +865,7 @@
       object-fit: contain;
       object-position: left center;
       margin-bottom: 12px;
+      display: block;
     }
 
     .foot h3 {
@@ -578,7 +914,7 @@
       color: #cfe1da;
     }
 
-    /* ================= MOBILE ================= */
+    /* ================= RESPONSIVE ================= */
 
     @media(max-width:1000px) {
 
@@ -609,6 +945,15 @@
 
     @media(max-width:720px) {
 
+      header {
+        height: 65px;
+      }
+
+      .logo {
+        width: 145px;
+        height: 58px;
+      }
+
       .navlinks,
       .actions .login {
         display: none;
@@ -616,10 +961,6 @@
 
       .menu {
         display: block;
-      }
-
-      .logo {
-        width: 130px;
       }
 
       .hero h1 {
@@ -632,7 +973,7 @@
 
       .field {
         border-right: 0;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid var(--line);
         padding: 11px;
       }
 
@@ -655,6 +996,38 @@
       .foot {
         grid-template-columns: 1fr 1fr;
       }
+
+      .detailgrid {
+        grid-template-columns: 1fr;
+      }
+
+      .info {
+        position: static;
+      }
+
+      .details-table {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .thumbs {
+        grid-template-columns: repeat(4,1fr);
+      }
+
+      .mainphoto {
+        height: 300px;
+      }
+
+      .form {
+        grid-template-columns: 1fr;
+      }
+
+      .full {
+        grid-column: auto;
+      }
     }
 
     @media(max-width:450px) {
@@ -666,98 +1039,188 @@
       .foot {
         grid-template-columns: 1fr;
       }
+
+      .tabs {
+        flex-wrap: wrap;
+      }
+
+      .tab {
+        padding: 10px 16px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ================= HEADER ================= -->
+<!-- ================= HEADER ================= -->
 
-  <header>
+<header>
+  <div class="container nav">
 
-    <div class="container nav">
+    <!-- YOUR LOGO -->
+    <a href="#" onclick="showHome(); return false;">
+      <img
+        src="logo.jpg"
+        class="logo"
+        alt="Unga Property Logo"
+      >
+    </a>
 
-    <a href="#">
-    <img src="logo.jpg" class="logo" alt="Unga Property Logo">
-</a>
- <!-- NAVIGATION -->
-      <nav class="navlinks">
+    <nav class="navlinks">
 
-        <a href="#">Home</a>
+      <a href="#" onclick="showHome(); return false;">
+        Home
+      </a>
 
-        <div class="navdrop">
-          <a href="#">Buy</a>
+      <div class="navdrop">
+        <a href="#properties">Buy</a>
 
-          <div class="dropdown">
-            <a href="#">Houses</a>
-            <a href="#">Apartments</a>
-            <a href="#">Villas</a>
-            <a href="#">Plots</a>
-          </div>
+        <div class="dropdown">
+          <a href="#properties" data-mode-link="Buy">
+            Buy Properties
+          </a>
+          <a href="#properties" data-mode-link="Rent">
+            Rent Properties
+          </a>
+          <a href="#properties" data-mode-link="Commercial">
+            Commercial
+          </a>
+          <a href="#categories">
+            Plots
+          </a>
         </div>
-
-        <div class="navdrop">
-          <a href="#">Rent</a>
-
-          <div class="dropdown">
-            <a href="#">Houses for Rent</a>
-            <a href="#">Apartments for Rent</a>
-            <a href="#">Commercial Rent</a>
-          </div>
-        </div>
-
-        <div class="navdrop">
-          <a href="#">Commercial</a>
-
-          <div class="dropdown">
-            <a href="#">Office</a>
-            <a href="#">Shop</a>
-            <a href="#">Warehouse</a>
-          </div>
-        </div>
-
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-
-      </nav>
-
-      <div class="actions">
-        <button class="login">Login</button>
-        <button class="post">Post Property</button>
       </div>
 
-      <button class="menu">☰</button>
+      <div class="navdrop">
+        <a href="#properties">Locations</a>
 
+        <div class="dropdown">
+
+          <div class="subhead">
+            Our Locations
+          </div>
+
+          <a href="#properties" data-location="Avadi">
+            Avadi
+          </a>
+
+          <a href="#properties" data-location="Thirunindravur">
+            Thirunindravur
+          </a>
+
+          <a href="#properties" data-location="Thirumalisai">
+            Thirumalisai
+          </a>
+
+          <a href="#properties" data-location="Vepampattu">
+            Vepampattu
+          </a>
+
+          <a href="#properties" data-location="Thiruvallur">
+            Thiruvallur
+          </a>
+
+          <a href="#properties" data-location="Sevaipettai">
+            Sevaipettai
+          </a>
+
+          <a href="#properties" data-location="Thamaraipakkam">
+            Thamaraipakkam
+          </a>
+
+        </div>
+      </div>
+
+      <a href="#why">
+        Projects
+      </a>
+
+      <a href="#footer">
+        About Us
+      </a>
+
+      <a href="#footer">
+        Contact
+      </a>
+
+    </nav>
+
+    <div class="actions">
+      <button aria-label="Saved properties">
+        ♡
+      </button>
+
+      <button
+        class="login"
+        id="login"
+      >
+        ♙ Login
+      </button>
+
+      <button
+        class="post"
+        id="post"
+      >
+        ＋ Post Property
+      </button>
     </div>
 
-  </header>
+    <button class="menu">
+      ☰
+    </button>
+
+  </div>
+</header>
 
 
-  <!-- ================= HERO ================= -->
+<!-- ================= HOME ================= -->
+
+<div class="home">
+
+  <!-- HERO -->
 
   <section class="hero">
 
     <div class="container">
 
-      <h1>Find Your<br>Perfect Property</h1>
+      <h1>
+        Find a property<br>
+        you’ll love.
+      </h1>
 
       <p>
-        Buy, rent or sell properties with confidence.
+        Buy, Rent or Commercial – We make it simple.
       </p>
+
+      <div class="mode-label">
+        Search properties for
+      </div>
 
       <div class="tabs">
 
-        <button class="tab active">
-          Buy
+        <button
+          type="button"
+          class="tab active"
+          data-mode="Buy"
+        >
+          ⌂ &nbsp;Buy
         </button>
 
-        <button class="tab">
-          Rent
+        <button
+          type="button"
+          class="tab"
+          data-mode="Rent"
+        >
+          ⌂ &nbsp;Rent
         </button>
 
-        <button class="tab">
-          Commercial
+        <button
+          type="button"
+          class="tab"
+          data-mode="Commercial"
+        >
+          ▣ &nbsp;Commercial
         </button>
 
       </div>
@@ -765,57 +1228,139 @@
 
       <!-- SEARCH -->
 
-      <div class="search">
+      <form
+        class="search"
+        id="searchForm"
+      >
 
         <div class="field">
-          <label>LOCATION</label>
+
+          <label for="location">
+            Location
+          </label>
+
           <input
-            type="text"
-            placeholder="City or locality"
+            id="location"
+            list="propertyLocations"
+            placeholder="Select or enter location"
+            autocomplete="off"
           >
+
+          <datalist id="propertyLocations">
+
+            <option value="Avadi"></option>
+            <option value="Thirunindravur"></option>
+            <option value="Thirumalisai"></option>
+            <option value="Vepampattu"></option>
+            <option value="Thiruvallur"></option>
+            <option value="Sevaipettai"></option>
+            <option value="Thamaraipakkam"></option>
+
+          </datalist>
+
         </div>
+
 
         <div class="field">
-          <label>PROPERTY TYPE</label>
 
-          <select>
-            <option>Any property</option>
-            <option>House</option>
-            <option>Apartment</option>
-            <option>Villa</option>
-            <option>Plot</option>
+          <label>
+            Property Type
+          </label>
+
+          <select id="type">
+
+            <option value="">
+              Select type
+            </option>
+
+            <option>
+              Apartment
+            </option>
+
+            <option>
+              Villa
+            </option>
+
+            <option>
+              House
+            </option>
+
+            <option>
+              Plot
+            </option>
+
+            <option>
+              PG
+            </option>
+
           </select>
+
         </div>
+
 
         <div class="field">
-          <label>BEDROOMS</label>
+
+          <label>
+            Budget
+          </label>
 
           <select>
-            <option>Any</option>
-            <option>1 BHK</option>
-            <option>2 BHK</option>
-            <option>3 BHK</option>
-            <option>4+ BHK</option>
+
+            <option>
+              Any Budget
+            </option>
+
+            <option>
+              Under ₹20,000
+            </option>
+
+            <option>
+              ₹20,000–₹50,000
+            </option>
+
+            <option>
+              ₹50,000+
+            </option>
+
           </select>
+
         </div>
+
 
         <div class="field">
-          <label>PRICE</label>
+
+          <label>
+            BHK
+          </label>
 
           <select>
-            <option>Any</option>
-            <option>Below ₹25L</option>
-            <option>₹25L - ₹50L</option>
-            <option>₹50L - ₹1Cr</option>
-            <option>Above ₹1Cr</option>
+
+            <option>
+              Any
+            </option>
+
+            <option>
+              1 BHK
+            </option>
+
+            <option>
+              2 BHK
+            </option>
+
+            <option>
+              3 BHK
+            </option>
+
           </select>
+
         </div>
 
-        <button onclick="searchProperty()">
+
+        <button type="submit">
           🔍 Search
         </button>
 
-      </div>
+      </form>
 
 
       <!-- TRUST -->
@@ -823,39 +1368,78 @@
       <div class="trust">
 
         <div class="trustitem">
-          <div class="trusticon">✓</div>
+
+          <div class="trusticon">
+            ✓
+          </div>
 
           <div>
-            <strong>Verified Properties</strong>
-            <span>Trusted listings</span>
+            <strong>
+              Verified Properties
+            </strong>
+
+            <span>
+              All listings verified
+            </span>
           </div>
+
         </div>
 
+
         <div class="trustitem">
-          <div class="trusticon">🏠</div>
+
+          <div class="trusticon">
+            ☎
+          </div>
 
           <div>
-            <strong>Wide Selection</strong>
-            <span>Thousands of homes</span>
+            <strong>
+              Direct Contact
+            </strong>
+
+            <span>
+              Connect with owners
+            </span>
           </div>
+
         </div>
 
+
         <div class="trustitem">
-          <div class="trusticon">🔒</div>
+
+          <div class="trusticon">
+            ⊘
+          </div>
 
           <div>
-            <strong>Secure Process</strong>
-            <span>Safe & transparent</span>
+            <strong>
+              No Brokerage
+            </strong>
+
+            <span>
+              Save your money
+            </span>
           </div>
+
         </div>
 
+
         <div class="trustitem">
-          <div class="trusticon">♥</div>
+
+          <div class="trusticon">
+            ♙
+          </div>
 
           <div>
-            <strong>Expert Support</strong>
-            <span>We're here to help</span>
+            <strong>
+              Easy & Fast
+            </strong>
+
+            <span>
+              Simple search experience
+            </span>
           </div>
+
         </div>
 
       </div>
@@ -867,195 +1451,26 @@
 
   <!-- ================= PROPERTIES ================= -->
 
-  <section class="soft">
+  <section id="properties">
 
     <div class="container">
 
       <div class="head">
 
-        <h2>Featured Properties</h2>
+        <h2>
+          Featured Properties
+        </h2>
 
         <a href="#">
-          View All →
+          View All Properties →
         </a>
 
       </div>
 
-
-      <div class="cards">
-
-
-        <!-- PROPERTY 1 -->
-
-        <div class="card">
-
-          <div
-            class="pic"
-            style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80')"
-          >
-
-            <span class="verified">
-              ✓ VERIFIED
-            </span>
-
-            <button class="heart">
-              ♡
-            </button>
-
-          </div>
-
-          <div class="body">
-
-            <h3>
-              Modern Family Villa
-            </h3>
-
-            <div class="loc">
-              Chennai, Tamil Nadu
-            </div>
-
-            <div class="meta">
-              3 BHK · 2,100 sq.ft
-            </div>
-
-            <div class="price">
-              ₹85 Lakh
-              <small> onwards</small>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- PROPERTY 2 -->
-
-        <div class="card">
-
-          <div
-            class="pic"
-            style="background-image:url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=80')"
-          >
-
-            <span class="verified">
-              ✓ VERIFIED
-            </span>
-
-            <button class="heart">
-              ♡
-            </button>
-
-          </div>
-
-          <div class="body">
-
-            <h3>
-              Luxury Apartment
-            </h3>
-
-            <div class="loc">
-              Chennai, Tamil Nadu
-            </div>
-
-            <div class="meta">
-              2 BHK · 1,250 sq.ft
-            </div>
-
-            <div class="price">
-              ₹62 Lakh
-              <small> onwards</small>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- PROPERTY 3 -->
-
-        <div class="card">
-
-          <div
-            class="pic"
-            style="background-image:url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80')"
-          >
-
-            <span class="verified">
-              ✓ VERIFIED
-            </span>
-
-            <button class="heart">
-              ♡
-            </button>
-
-          </div>
-
-          <div class="body">
-
-            <h3>
-              Premium Villa
-            </h3>
-
-            <div class="loc">
-              Coimbatore, Tamil Nadu
-            </div>
-
-            <div class="meta">
-              4 BHK · 2,800 sq.ft
-            </div>
-
-            <div class="price">
-              ₹1.25 Cr
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- PROPERTY 4 -->
-
-        <div class="card">
-
-          <div
-            class="pic"
-            style="background-image:url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80')"
-          >
-
-            <span class="verified">
-              ✓ VERIFIED
-            </span>
-
-            <button class="heart">
-              ♡
-            </button>
-
-          </div>
-
-          <div class="body">
-
-            <h3>
-              Elegant City Home
-            </h3>
-
-            <div class="loc">
-              Madurai, Tamil Nadu
-            </div>
-
-            <div class="meta">
-              3 BHK · 1,850 sq.ft
-            </div>
-
-            <div class="price">
-              ₹72 Lakh
-            </div>
-
-          </div>
-
-        </div>
-
-
-      </div>
+      <div
+        class="cards"
+        id="cards"
+      ></div>
 
     </div>
 
@@ -1064,46 +1479,51 @@
 
   <!-- ================= CATEGORIES ================= -->
 
-  <section>
+  <section
+    class="soft"
+    id="categories"
+  >
 
     <div class="container">
 
       <div class="head">
-        <h2>Explore Properties</h2>
+        <h2>
+          Browse by Category
+        </h2>
       </div>
 
 
       <div class="categories">
 
-        <div class="cat">
-          <div class="caticon">🏠</div>
-          <strong>Houses</strong>
-        </div>
-
-        <div class="cat">
-          <div class="caticon">🏢</div>
+        <a class="cat" href="#properties">
+          <div class="caticon">▥</div>
           <strong>Apartments</strong>
-        </div>
+        </a>
 
-        <div class="cat">
-          <div class="caticon">🏡</div>
+        <a class="cat" href="#properties">
+          <div class="caticon">⌂</div>
           <strong>Villas</strong>
-        </div>
+        </a>
 
-        <div class="cat">
-          <div class="caticon">🌳</div>
+        <a class="cat" href="#properties">
+          <div class="caticon">⌂</div>
+          <strong>Independent House</strong>
+        </a>
+
+        <a class="cat" href="#properties">
+          <div class="caticon">♧</div>
           <strong>Plots</strong>
-        </div>
+        </a>
 
-        <div class="cat">
-          <div class="caticon">🏬</div>
+        <a class="cat" href="#properties">
+          <div class="caticon">▥</div>
           <strong>Commercial</strong>
-        </div>
+        </a>
 
-        <div class="cat">
-          <div class="caticon">🏘️</div>
+        <a class="cat" href="#properties">
+          <div class="caticon">▦</div>
           <strong>Rental</strong>
-        </div>
+        </a>
 
       </div>
 
@@ -1112,14 +1532,18 @@
   </section>
 
 
-  <!-- ================= WHY US ================= -->
+  <!-- ================= WHY ================= -->
 
-  <section class="soft" id="about">
+  <section id="why">
 
     <div class="container">
 
       <div class="head">
-        <h2>Why Choose Unga Property?</h2>
+
+        <h2>
+          Why Choose Unga Property?
+        </h2>
+
       </div>
 
 
@@ -1132,11 +1556,15 @@
           </div>
 
           <div>
-            <h3>Verified Listings</h3>
+
+            <h3>
+              Verified Listings
+            </h3>
 
             <p>
-              Find genuine and verified property listings.
+              All properties are verified for your safety.
             </p>
+
           </div>
 
         </div>
@@ -1145,15 +1573,19 @@
         <div class="whyitem">
 
           <div class="whyicon">
-            🔍
+            ♧
           </div>
 
           <div>
-            <h3>Easy Search</h3>
+
+            <h3>
+              Direct Connection
+            </h3>
 
             <p>
-              Quickly find properties matching your needs.
+              Connect directly with property owners.
             </p>
+
           </div>
 
         </div>
@@ -1162,15 +1594,19 @@
         <div class="whyitem">
 
           <div class="whyicon">
-            🔒
+            ⌕
           </div>
 
           <div>
-            <h3>Safe & Secure</h3>
+
+            <h3>
+              Easy Search
+            </h3>
 
             <p>
-              A transparent and secure property experience.
+              Advanced filters help you find the right property.
             </p>
+
           </div>
 
         </div>
@@ -1179,15 +1615,19 @@
         <div class="whyitem">
 
           <div class="whyicon">
-            ☎
+            ♡
           </div>
 
           <div>
-            <h3>Expert Support</h3>
+
+            <h3>
+              Trusted Platform
+            </h3>
 
             <p>
-              Get support whenever you need it.
+              A simple platform built for property discovery.
             </p>
+
           </div>
 
         </div>
@@ -1208,15 +1648,15 @@
       <div class="cta">
 
         <h2>
-          Have a Property to Sell or Rent?
+          Have a property to sell or rent?
         </h2>
 
         <p>
-          List your property on Unga Property and reach potential buyers and tenants.
+          List it on Unga Property and reach genuine buyers and tenants.
         </p>
 
-        <button>
-          Post Your Property
+        <button onclick="openModal()">
+          ＋ Post Your Property
         </button>
 
       </div>
@@ -1225,204 +1665,1108 @@
 
   </section>
 
+</div>
 
-  <!-- ================= FOOTER ================= -->
 
-  <footer id="contact">
+<!-- ================= PROPERTY DETAILS ================= -->
+
+<div
+  class="detail"
+  id="detail"
+>
+
+  <section>
 
     <div class="container">
 
-      <div class="foot">
+      <button
+        class="back"
+        onclick="showHome()"
+      >
+        ← Back to properties
+      </button>
+
+      <div class="breadcrumb">
+        Home › Properties › Property Details
+      </div>
 
 
-        <div>
-
-          <img
-            src="logo.jpg"
-            class="footlogo"
-            alt="Unga Property Logo"
-          >
-
-          <p>
-            Unga Property helps you discover,
-            buy, rent and sell properties easily.
-          </p>
-
-        </div>
-
+      <div class="detailgrid">
 
         <div>
 
-          <h3>Property</h3>
+          <div class="gallery">
 
-          <div class="flinks">
-            <a href="#">Buy Property</a>
-            <a href="#">Rent Property</a>
-            <a href="#">Commercial</a>
-            <a href="#">New Projects</a>
+            <div
+              class="mainphoto"
+              id="mainphoto"
+            ></div>
+
+            <div
+              class="thumbs"
+              id="thumbs"
+            ></div>
+
+          </div>
+
+
+          <div class="detailcontent">
+
+            <h2>
+              Property Description
+            </h2>
+
+            <p>
+              Beautiful property available in a prime location.
+              This property comes with modern amenities,
+              spacious rooms and excellent ventilation.
+              Ideal for families looking for a comfortable
+              and peaceful living.
+            </p>
+
+
+            <h2>
+              Property Details
+            </h2>
+
+            <div class="details-table">
+
+              <div class="detailrow">
+                <span>Property Type</span>
+                <b>Villa</b>
+              </div>
+
+              <div class="detailrow">
+                <span>Furnishing</span>
+                <b>Semi Furnished</b>
+              </div>
+
+              <div class="detailrow">
+                <span>BHK</span>
+                <b>3 BHK</b>
+              </div>
+
+              <div class="detailrow">
+                <span>Car Parking</span>
+                <b>1</b>
+              </div>
+
+              <div class="detailrow">
+                <span>Bathrooms</span>
+                <b>3</b>
+              </div>
+
+              <div class="detailrow">
+                <span>Facing</span>
+                <b>East</b>
+              </div>
+
+              <div class="detailrow">
+                <span>Area</span>
+                <b>1800 sq.ft</b>
+              </div>
+
+            </div>
+
           </div>
 
         </div>
 
 
-        <div>
+        <aside>
 
-          <h3>Company</h3>
+          <div class="info">
 
-          <div class="flinks">
-            <a href="#about">About Us</a>
-            <a href="#">Careers</a>
-            <a href="#">Contact</a>
-            <a href="#">Help</a>
-          </div>
+            <div class="price">
+              ₹45,000
+              <small>/ month</small>
+            </div>
 
-        </div>
+            <h1>
+              3 BHK Villa
+            </h1>
 
-
-        <div>
-
-          <h3>Contact</h3>
-
-          <p>
-            Chennai, Tamil Nadu
-          </p>
-
-          <p>
-            Phone: +91 98765 43210
-          </p>
-
-          <p>
-            Email: info@ungaproperty.com
-          </p>
-
-        </div>
+            <div class="loc">
+              Thoraipakkam, Chennai, Tamil Nadu
+            </div>
 
 
-        <div>
+            <div class="specs">
 
-          <h3>Newsletter</h3>
+              <div>⌂ &nbsp;3 BHK</div>
+              <div>▣ &nbsp;1800 sq.ft</div>
+              <div>⌂ &nbsp;Villa</div>
+              <div>♧ &nbsp;3 Bathrooms</div>
+              <div>▱ &nbsp;1 Balcony</div>
+              <div>▥ &nbsp;1 Car Parking</div>
+              <div>◐ &nbsp;Semi Furnished</div>
 
-          <p>
-            Subscribe for property updates.
-          </p>
+            </div>
 
-          <div class="newsletter">
 
-            <input
-              type="email"
-              placeholder="Your email"
+            <button
+              class="contact"
+              onclick="alert('Contact Owner feature can be connected to your backend.')"
             >
+              Contact Owner
+            </button>
 
-            <button>
-              Subscribe
+            <button class="save">
+              ♡ Save Property
             </button>
 
           </div>
 
+
+          <div class="owner">
+
+            <h3>
+              Owner Information
+            </h3>
+
+            <b>
+              ✓ Verified Owner
+            </b>
+
+            <p style="font-size:11px;color:#66736d;margin-top:8px;">
+              Member since May 2023
+            </p>
+
+            <p style="font-size:12px;">
+              ☎ +91 98765 43210
+            </p>
+
+          </div>
+
+
+          <div class="mapbox">
+
+            <h3>
+              Location
+            </h3>
+
+            <div
+              style="
+                height:120px;
+                border-radius:8px;
+                background:#e8efec;
+                display:grid;
+                place-items:center;
+                color:#005a3f;
+                font-weight:800;
+              "
+            >
+              📍 Chennai, Tamil Nadu
+            </div>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section>
+
+    <div class="container">
+
+      <div class="head">
+        <h2>
+          Similar Properties
+        </h2>
+      </div>
+
+      <div
+        class="cards"
+        id="similar"
+      ></div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- ================= POST PROPERTY MODAL ================= -->
+
+<div
+  class="modal"
+  id="modal"
+>
+
+  <div class="modalbox">
+
+    <div class="modalhead">
+
+      <h2>
+        Post Your Property
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <form
+      class="form"
+      id="postPropertyForm"
+    >
+
+      <div>
+
+        <label>
+          Your Name
+
+          <input
+            name="name"
+            required
+          >
+
+        </label>
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Phone Number
+
+          <input
+            name="phone"
+            required
+            placeholder="+91"
+          >
+
+        </label>
+
+      </div>
+
+
+      <div class="full">
+
+        <label>
+          Property Title
+
+          <input
+            name="title"
+            required
+            placeholder="e.g. DTCP Approved Plot in Thiruvallur"
+          >
+
+        </label>
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Listing Type
+
+          <select
+            name="mode"
+            required
+          >
+
+            <option value="">
+              Select
+            </option>
+
+            <option>
+              Buy
+            </option>
+
+            <option>
+              Rent
+            </option>
+
+            <option>
+              Commercial
+            </option>
+
+          </select>
+
+        </label>
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Property Type
+
+          <select
+            name="type"
+            required
+          >
+
+            <option value="">
+              Select
+            </option>
+
+            <option>
+              Apartment
+            </option>
+
+            <option>
+              Villa
+            </option>
+
+            <option>
+              Independent House
+            </option>
+
+            <option>
+              Plot
+            </option>
+
+            <option>
+              Commercial Building
+            </option>
+
+            <option>
+              Office
+            </option>
+
+            <option>
+              Shop
+            </option>
+
+          </select>
+
+        </label>
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Price / Rent
+
+          <input
+            name="price"
+            required
+            placeholder="₹"
+          >
+
+        </label>
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Location
+
+          <select
+            name="location"
+            required
+          >
+
+            <option value="">
+              Select location
+            </option>
+
+            <option>Avadi</option>
+            <option>Thirunindravur</option>
+            <option>Thirumalisai</option>
+            <option>Vepampattu</option>
+            <option>Thiruvallur</option>
+            <option>Sevaipettai</option>
+            <option>Thamaraipakkam</option>
+
+          </select>
+
+        </label>
+
+      </div>
+
+
+      <div class="full">
+
+        <label>
+          Property Images
+        </label>
+
+        <div class="upload-box">
+
+          <label
+            class="upload-label"
+            for="propertyImages"
+          >
+            ＋ Add Images
+          </label>
+
+          <input
+            id="propertyImages"
+            type="file"
+            accept="image/*"
+            multiple
+          >
+
+          <span class="upload-help">
+            Add one or multiple images.
+          </span>
+
+          <div
+            class="image-preview-grid"
+            id="imagePreviewGrid"
+          ></div>
+
         </div>
 
       </div>
 
 
-      <div class="copy">
-        © 2026 Unga Property. All Rights Reserved.
+      <div class="full">
+
+        <label>
+          Description
+
+          <textarea
+            name="description"
+            placeholder="Tell buyers or tenants about the property"
+          ></textarea>
+
+        </label>
+
       </div>
 
-    </div>
 
-  </footer>
+      <div class="full">
+
+        <button
+          class="submit"
+          type="submit"
+        >
+          Submit Property
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
 
 
-  <!-- ================= JAVASCRIPT ================= -->
+<!-- ================= JAVASCRIPT ================= -->
 
-  <script>
+<script>
 
-    function searchProperty() {
+  const imgs = [
 
-      const location =
-        document.querySelector(
-          '.field input'
-        ).value;
+    "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80",
 
-      if (location.trim() === "") {
+    "https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=900&q=80",
+
+    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80",
+
+    "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&q=80"
+
+  ];
+
+
+  const data = [
+
+    [
+      "2 BHK Apartment",
+      "Avadi, Chennai",
+      "2 BHK • 950 sq.ft • Apartment",
+      "₹18,000",
+      "/ month",
+      imgs[0],
+      "Rent"
+    ],
+
+    [
+      "3 BHK Villa",
+      "Thirumalisai, Chennai",
+      "3 BHK • 1800 sq.ft • Villa",
+      "₹45,000",
+      "/ month",
+      imgs[1],
+      "Rent"
+    ],
+
+    [
+      "Independent House",
+      "Thiruvallur, Tamil Nadu",
+      "2 BHK • 1200 sq.ft • House",
+      "₹28,000",
+      "/ month",
+      imgs[2],
+      "Buy"
+    ],
+
+    [
+      "Commercial Space",
+      "Thamaraipakkam, Tamil Nadu",
+      "Commercial • 2400 sq.ft • Building",
+      "₹50,000",
+      "/ month",
+      imgs[3],
+      "Commercial"
+    ]
+
+  ];
+
+
+  let currentMode = "Buy";
+
+
+  /* PROPERTY CARD */
+
+  function card(p, i) {
+
+    return `
+
+      <article
+        class="card"
+        onclick="showDetail(${i})"
+      >
+
+        <div
+          class="pic"
+          style="background-image:url('${p[5]}')"
+        >
+
+          <span class="verified">
+            ✓ Verified
+          </span>
+
+          <button
+            class="heart"
+            onclick="
+              event.stopPropagation();
+              this.textContent =
+              this.textContent === '♡' ? '♥' : '♡';
+            "
+          >
+            ♡
+          </button>
+
+        </div>
+
+
+        <div class="body">
+
+          <h3>
+            ${p[0]}
+          </h3>
+
+          <div class="loc">
+            ${p[1]}
+          </div>
+
+          <div class="meta">
+            ${p[2]}
+          </div>
+
+          <div class="price">
+            ${p[3]}
+            <small>
+              ${p[4]}
+            </small>
+          </div>
+
+        </div>
+
+      </article>
+
+    `;
+
+  }
+
+
+  /* DISPLAY PROPERTIES */
+
+  function render(list = data) {
+
+    document.getElementById("cards").innerHTML =
+      list.map((p) => card(p, data.indexOf(p))).join("");
+
+    document.getElementById("similar").innerHTML =
+      data
+        .filter((_, i) => i !== 1)
+        .map((p) => card(p, data.indexOf(p)))
+        .join("");
+
+  }
+
+
+  render();
+
+
+  /* BUY / RENT / COMMERCIAL */
+
+  document
+    .querySelectorAll(".tabs .tab")
+    .forEach(tab => {
+
+      tab.addEventListener("click", () => {
+
+        document
+          .querySelectorAll(".tabs .tab")
+          .forEach(t =>
+            t.classList.remove("active")
+          );
+
+        tab.classList.add("active");
+
+        currentMode =
+          tab.dataset.mode;
+
+        filterProperties();
+
+      });
+
+    });
+
+
+  /* NAVIGATION MODE */
+
+  document
+    .querySelectorAll("[data-mode-link]")
+    .forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        currentMode =
+          link.dataset.modeLink;
+
+        document
+          .querySelectorAll(".tabs .tab")
+          .forEach(t => {
+
+            t.classList.toggle(
+              "active",
+              t.dataset.mode === currentMode
+            );
+
+          });
+
+        filterProperties();
+
+      });
+
+    });
+
+
+  /* LOCATION */
+
+  document
+    .querySelectorAll("[data-location]")
+    .forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        document.getElementById("location").value =
+          link.dataset.location;
+
+        document
+          .getElementById("properties")
+          .scrollIntoView({
+            behavior: "smooth"
+          });
+
+        filterProperties();
+
+      });
+
+    });
+
+
+  /* FILTER */
+
+  function filterProperties() {
+
+    const location =
+      document
+        .getElementById("location")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const type =
+      document
+        .getElementById("type")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    let results = data.filter(p => {
+
+      const modeOK =
+        currentMode === "Buy"
+          ? (p[6] === "Buy" || p[6] === "Rent")
+          : p[6] === currentMode;
+
+
+      const locationOK =
+        !location ||
+        p[1].toLowerCase().includes(location);
+
+
+      const typeOK =
+        !type ||
+        p[2].toLowerCase().includes(type);
+
+
+      return modeOK &&
+             locationOK &&
+             typeOK;
+
+    });
+
+
+    if (!results.length) {
+
+      document.getElementById("cards").innerHTML = `
+
+        <p
+          style="
+            grid-column:1/-1;
+            text-align:center;
+            padding:45px;
+            color:#66736d;
+          "
+        >
+          😔 No properties found.
+          <br>
+          Try changing your search.
+        </p>
+
+      `;
+
+    } else {
+
+      document.getElementById("cards").innerHTML =
+        results
+          .map(p => card(p, data.indexOf(p)))
+          .join("");
+
+    }
+
+  }
+
+
+  /* SEARCH FORM */
+
+  document
+    .getElementById("searchForm")
+    .addEventListener("submit", e => {
+
+      e.preventDefault();
+
+      filterProperties();
+
+      document
+        .getElementById("properties")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
+    });
+
+
+  /* PROPERTY DETAILS */
+
+  function showDetail(index = 1) {
+
+    const p =
+      data[index] || data[1];
+
+
+    document
+      .querySelector(".home")
+      .classList.add("hidden");
+
+
+    document
+      .querySelector(".detail")
+      .classList.add("active");
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+
+    document
+      .getElementById("mainphoto")
+      .style.backgroundImage =
+      `url('${p[5]}')`;
+
+
+    document
+      .getElementById("thumbs")
+      .innerHTML = imgs
+      .map((image, i) => `
+
+        <div
+          class="thumb ${image === p[5] ? "active" : ""}"
+          style="background-image:url('${image}')"
+          onclick="mainPhoto('${image}', this)"
+        ></div>
+
+      `)
+      .join("");
+
+  }
+
+
+  function mainPhoto(url, element) {
+
+    document
+      .getElementById("mainphoto")
+      .style.backgroundImage =
+      `url('${url}')`;
+
+
+    document
+      .querySelectorAll(".thumb")
+      .forEach(x =>
+        x.classList.remove("active")
+      );
+
+
+    element.classList.add("active");
+
+  }
+
+
+  function showHome() {
+
+    document
+      .querySelector(".home")
+      .classList.remove("hidden");
+
+
+    document
+      .querySelector(".detail")
+      .classList.remove("active");
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* POST PROPERTY MODAL */
+
+  function openModal() {
+
+    document
+      .getElementById("modal")
+      .classList.add("open");
+
+  }
+
+
+  function closeModal() {
+
+    document
+      .getElementById("modal")
+      .classList.remove("open");
+
+  }
+
+
+  document
+    .getElementById("post")
+    .onclick = openModal;
+
+
+  document
+    .getElementById("modal")
+    .addEventListener("click", e => {
+
+      if (e.target.id === "modal") {
+        closeModal();
+      }
+
+    });
+
+
+  /* LOGIN */
+
+  document
+    .getElementById("login")
+    .onclick = () => {
+
+      alert(
+        "Demo login — connect this to your authentication system."
+      );
+
+    };
+
+
+  /* IMAGE UPLOAD */
+
+  let selectedImages = [];
+
+
+  const imageInput =
+    document.getElementById("propertyImages");
+
+
+  const previewGrid =
+    document.getElementById("imagePreviewGrid");
+
+
+  imageInput.addEventListener("change", e => {
+
+    const files =
+      [...e.target.files]
+      .filter(file =>
+        file.type.startsWith("image/")
+      );
+
+
+    selectedImages =
+      [...selectedImages, ...files];
+
+
+    renderImagePreviews();
+
+
+    imageInput.value = "";
+
+  });
+
+
+  function renderImagePreviews() {
+
+    previewGrid.innerHTML = "";
+
+
+    selectedImages.forEach(
+      (file, index) => {
+
+        const reader =
+          new FileReader();
+
+
+        reader.onload = ev => {
+
+          const item =
+            document.createElement("div");
+
+
+          item.className =
+            "image-preview";
+
+
+          item.innerHTML = `
+
+            <img
+              src="${ev.target.result}"
+              alt="Property image ${index + 1}"
+            >
+
+            ${
+              index === 0
+              ? '<span class="primary-badge">Main photo</span>'
+              : ''
+            }
+
+            <button
+              type="button"
+              class="remove-image"
+            >
+              ×
+            </button>
+
+          `;
+
+
+          item
+            .querySelector(".remove-image")
+            .onclick = () => {
+
+              selectedImages.splice(index, 1);
+
+              renderImagePreviews();
+
+            };
+
+
+          previewGrid.appendChild(item);
+
+        };
+
+
+        reader.readAsDataURL(file);
+
+      }
+    );
+
+  }
+
+
+  /* POST PROPERTY SUBMIT */
+
+  document
+    .getElementById("postPropertyForm")
+    .addEventListener("submit", e => {
+
+      e.preventDefault();
+
+
+      if (selectedImages.length === 0) {
 
         alert(
-          "Please enter a location to search."
+          "Please add at least one property image."
         );
 
         return;
+
       }
 
+
       alert(
-        "Searching properties in " +
-        location
+        "Property submitted successfully! " +
+        selectedImages.length +
+        " image(s) added."
       );
-    }
 
 
-    // Buy / Rent / Commercial buttons
+      selectedImages = [];
 
-    const tabs =
-      document.querySelectorAll(".tab");
 
-    tabs.forEach(function(tab) {
+      renderImagePreviews();
 
-      tab.addEventListener(
-        "click",
-        function() {
 
-          tabs.forEach(function(item) {
-            item.classList.remove("active");
-          });
+      e.target.reset();
 
-          this.classList.add("active");
 
-        }
-      );
+      closeModal();
 
     });
 
-
-    // Favourite button
-
-    const hearts =
-      document.querySelectorAll(".heart");
-
-    hearts.forEach(function(heart) {
-
-      heart.addEventListener(
-        "click",
-        function() {
-
-          if (this.innerHTML === "♡") {
-            this.innerHTML = "♥";
-          } else {
-            this.innerHTML = "♡";
-          }
-
-        }
-      );
-
-    });
-
-
-    // Post property button
-
-    document
-      .querySelector(".post")
-      .addEventListener(
-        "click",
-        function() {
-
-          alert(
-            "Property posting feature coming soon!"
-          );
-
-        }
-      );
-
-
-  </script>
+</script>
 
 </body>
 </html>
